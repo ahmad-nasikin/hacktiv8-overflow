@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 
 var questionSchema = new Schema({
-    userId = [{
+    userId: [{
         type: ObjectId,
         ref: 'User'
     }],
