@@ -12,7 +12,7 @@ var answerSchema = new Schema({
         ref: 'Question'
     },
     content: {
-        type: ObjectId,
+        type: String,
         required: true
     },
     voteUp: [{
