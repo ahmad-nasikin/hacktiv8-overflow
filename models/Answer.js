@@ -7,10 +7,6 @@ var answerSchema = new Schema({
         type: ObjectId,
         ref: 'User'
     },
-    questionId: {
-        type: ObjectId,
-        ref: 'Question'
-    },
     content: {
         type: String,
         required: true
@@ -22,7 +18,11 @@ var answerSchema = new Schema({
     voteDown: [{
         type: ObjectId,
         ref: 'User'
-    }]
+    }],
+    author: {
+        type: ObjectId,
+        ref: 'User'
+    }
 }, {
     timestamps: true
 })

@@ -3,7 +3,10 @@ const models = require('../models/Question')
 var create = (req, res) => {
     models.create({
         title: req.body.title,
-        content: req.body.content
+        content: req.body.content,
+        answer: [],
+        voteUp: [],
+        voteDown: []
     })
     .then(result => {
         res.send(result)
@@ -55,5 +58,27 @@ var deleteQuestion = (req, res) => {
         res.send(err)
     })
 }
+
+var addAnswer = (req,res) => {
+    models.where({
+      _id: req.params.id
+    })
+    .update({
+      $push:{
+        answer: {
+          author: req.body.author,
+          content: req.body.content,
+          upvotes: [],
+          downvotes: []
+        }
+      }
+    })
+    .then(result => {
+      res.send(result)
+    })
+    .catch(err=> {
+      res.send(err)
+    })
+  }
 
 module.exports = {create, allQuestions, updateQuestion, deleteQuestion}

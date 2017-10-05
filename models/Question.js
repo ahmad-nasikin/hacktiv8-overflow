@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
+const answerSchema = require('./Answer')
 
 var questionSchema = new Schema({
     userId: [{
@@ -17,7 +18,7 @@ var questionSchema = new Schema({
     },
     answer: [{
         type: ObjectId,
-        ref: 'answer'
+        ref: 'Answer'
     }],
     voteUp: [{
         type: ObjectId,

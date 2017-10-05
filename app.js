@@ -7,6 +7,7 @@ const cors = require('cors')
 mongoose.connect('mongodb://localhost/hack-flow')//dev
 var index = require('./routes/user')
 var question = require('./routes/question')
+var answer = require('./routes/answer')
 
 var app = express()
 
@@ -18,6 +19,7 @@ app.use(bodyParser.json())
 
 app.use('/', index)
 app.use('/question', question)
+app.use('/answer', answer)
 
 app.listen(process.env.PORT || 3000, () => {
     console.log('Connected')
