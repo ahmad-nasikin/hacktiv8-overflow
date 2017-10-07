@@ -1,10 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const question = require('../controllers/questionControll')
+const auth = require('../helper/auth')
 
-router.post('/', question.create)
+router.post('/', auth.authUser, auth.authByid, question.create)
 router.get('/', question.allQuestions)
-router.put('/:id', question.updateQuestion)
-router.delete('/:id', question.deleteQuestion)
+router.put('/:id', auth.authUser, auth.authByid, question.updateQuestion)
+router.delete('/:id', auth.authUser, auth.authByid, question.deleteQuestion)
 
 module.exports = router

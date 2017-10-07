@@ -2,6 +2,7 @@ const models = require('../models/Question')
 
 var create = (req, res) => {
     models.create({
+        userId: req.headers.auth._id,
         title: req.body.title,
         content: req.body.content,
         answer: [],
@@ -18,6 +19,8 @@ var create = (req, res) => {
 
 var allQuestions = (req, res) => {
     models.find({})
+    .populate('answer')
+    .populate('userId', 'username')
     .then(result => {
         res.send(result)
     })
