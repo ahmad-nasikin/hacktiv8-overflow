@@ -62,26 +62,4 @@ var deleteQuestion = (req, res) => {
     })
 }
 
-var addAnswer = (req,res) => {
-    models.where({
-      _id: req.params.id
-    })
-    .update({
-      $push:{
-        answer: {
-          author: req.body.author,
-          content: req.body.content,
-          upvotes: [],
-          downvotes: []
-        }
-      }
-    })
-    .then(result => {
-      res.send(result)
-    })
-    .catch(err=> {
-      res.send(err)
-    })
-  }
-
 module.exports = {create, allQuestions, updateQuestion, deleteQuestion}

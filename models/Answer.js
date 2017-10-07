@@ -3,10 +3,10 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 
 var answerSchema = new Schema({
-    userId: {
-        type: ObjectId,
-        ref: 'User'
-    },
+    // userId: {
+    //     type: ObjectId,
+    //     ref: 'User'
+    // },
     content: {
         type: String,
         required: true

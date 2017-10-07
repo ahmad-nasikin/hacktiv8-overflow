@@ -1,12 +1,12 @@
-const models = require('../models/Answer')
+const Answer = require('../models/Answer')
 const Question = require('../models/Question')
 
 var replay = (req, res) => {
-    models.create({
+    Answer.create({
         content: req.body.content,
         voteUp: [],
         voteDown: []
-        // author: 
+        author: req.headers.auth._id,
     })
     .then(result => {
         console.log('result', result)
@@ -27,5 +27,7 @@ var replay = (req, res) => {
         res.send(err)
     })
 }
+
+
 
 module.exports = {replay}

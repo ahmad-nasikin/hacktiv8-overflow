@@ -4,10 +4,10 @@ const ObjectId = Schema.Types.ObjectId
 const answerSchema = require('./Answer')
 
 var questionSchema = new Schema({
-    userId: [{
+    userId: {
         type: ObjectId,
         ref: 'User'
-    }],
+    },
     title: {
         type: String,
         required: true
