@@ -82,4 +82,24 @@ var deleteQuestion = (req, res) => {
     })
 }
 
-module.exports = {create, allQuestions, updateQuestion, deleteQuestion}
+deleteAnswer = (req, res) => {
+    models.findById({
+        _id: req.params.id
+    })
+    .then(result => {
+        Answer.findByIdAndRemove({
+            _id: req.params.id
+        })
+        .then(resultDel => {
+            res.send('Succes Remove Answer')
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    })
+    .catch(err => {
+        res.send(err)
+    })
+}
+
+module.exports = {create, allQuestions, updateQuestion, deleteQuestion, deleteAnswer}

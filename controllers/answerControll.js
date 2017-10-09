@@ -2,7 +2,7 @@ const Answer = require('../models/Answer')
 const Question = require('../models/Question')
 
 var replay = (req, res) => {
-    console.log('id question', req.params.q_id)
+    // console.log('id question', req.params.q_id)
     Answer.create({
         questionId: req.params.q_id,
         content: req.body.content,
