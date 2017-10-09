@@ -3,8 +3,8 @@ const logger = require('morgan')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const cors = require('cors')
-// mongoose.connect('mongodb://joxkert:joxkert@onlyportofolio-shard-00-00-etzzq.mongodb.net:27017,onlyportofolio-shard-00-01-etzzq.mongodb.net:27017,onlyportofolio-shard-00-02-etzzq.mongodb.net:27017/test?ssl=true&replicaSet=OnlyPortofolio-shard-0&authSource=admin')
-mongoose.connect('mongodb://localhost/hack-flow')//dev
+mongoose.connect('mongodb://joxkert:joxkert@onlyportofolio-shard-00-00-etzzq.mongodb.net:27017,onlyportofolio-shard-00-01-etzzq.mongodb.net:27017,onlyportofolio-shard-00-02-etzzq.mongodb.net:27017/test?ssl=true&replicaSet=OnlyPortofolio-shard-0&authSource=admin')
+// mongoose.connect('mongodb://localhost/hack-flow')//dev
 var index = require('./routes/user')
 var question = require('./routes/question')
 var answer = require('./routes/answer')
