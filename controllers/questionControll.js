@@ -57,14 +57,14 @@ var deleteQuestion = (req, res) => {
         _id: req.params.id
     })
     .then(result => {
-        console.log('result', result)
+        console.log('ini result delete', result)
         Answer.findOne({
-            questionId: req.params.q_id
+            questionId: req.params.id
         })
         .then(resultDel => {
             console.log(resultDel)
             Answer.remove({
-                questionId: req.params.q_id
+                questionId: req.params.id
             })
             .then(resultall => {
                 res.send(resultall)
