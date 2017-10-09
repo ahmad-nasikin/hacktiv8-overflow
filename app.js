@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.use('/', index)
-app.use('/question', question)
+app.use('/questions', question)
 app.use('/answer', answer)
 
 app.listen(process.env.PORT || 3000, () => {

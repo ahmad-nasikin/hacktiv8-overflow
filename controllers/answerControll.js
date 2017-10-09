@@ -2,11 +2,14 @@ const Answer = require('../models/Answer')
 const Question = require('../models/Question')
 
 var replay = (req, res) => {
+    console.log('id question', req.params.q_id)
     Answer.create({
+        questionId: req.params.q_id,
         content: req.body.content,
         voteUp: [],
-        voteDown: []
-        author: req.headers.auth._id,
+        voteDown: [],
+        author: req.headers.auth._id
+
     })
     .then(result => {
         console.log('result', result)
@@ -17,7 +20,7 @@ var replay = (req, res) => {
         }})
         .then(resultAnswer => {
             console.log('resultAnswer', resultAnswer)
-            res.send('Replay Question')
+            res.send('Replay Question Success')
         })
         .catch(err => {
             res.send(err)
@@ -28,6 +31,14 @@ var replay = (req, res) => {
     })
 }
 
-
+var getAllData = (req, res) => {
+    Answer.find({})
+    .then(result => {
+        res.send(result)
+    })
+    .catch(err => {
+        res.send(err)
+    })
+}
 
 module.exports = {replay}

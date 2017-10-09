@@ -1,6 +1,8 @@
 const models = require('../models/Question')
+const Answer = require('../models/Answer')
 
 var create = (req, res) => {
+    console.log('id username', req.headers.auth)
     models.create({
         userId: req.headers.auth._id,
         title: req.body.title,
@@ -55,7 +57,25 @@ var deleteQuestion = (req, res) => {
         _id: req.params.id
     })
     .then(result => {
-        res.send(result)
+        console.log('result', result)
+        Answer.findOne({
+            questionId: req.params.q_id
+        })
+        .then(resultDel => {
+            console.log(resultDel)
+            Answer.remove({
+                questionId: req.params.q_id
+            })
+            .then(resultall => {
+                res.send(resultall)
+            })
+            .catch(err => {
+                res.send(err)
+            })
+        })
+        .catch(err => {
+            res.send(err)
+        })
     })
     .catch(err => {
         res.send(err)
