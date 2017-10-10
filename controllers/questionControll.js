@@ -50,24 +50,34 @@ var updateQuestion = (req, res) => {
 }
 
 var deleteQuestion = (req, res) => {
-    // models.findById({
-    //     _id: req.params.id
-    // })
-    models.remove({
+    models.findById({
         _id: req.params.id
     })
     .then(result => {
-        console.log('ini result delete', result)
-        Answer.findOne({
-            questionId: req.params.id
+      console.log('headers token', req.headers.auth._id)
+      console.log('result id', result.userId)
+      if (req.headers.auth._id != result.userId) {
+        res.send('tidak bisa delete')
+      } else {
+        models.remove({
+            _id: req.params.id
         })
-        .then(resultDel => {
-            console.log(resultDel)
-            Answer.remove({
+        .then(result => {
+            console.log('ini result delete', result)
+            Answer.findOne({
                 questionId: req.params.id
             })
-            .then(resultall => {
-                res.send(resultall)
+            .then(resultDel => {
+                console.log(resultDel)
+                Answer.remove({
+                    questionId: req.params.id
+                })
+                .then(resultall => {
+                    res.send(resultall)
+                })
+                .catch(err => {
+                    res.send(err)
+                })
             })
             .catch(err => {
                 res.send(err)
@@ -76,9 +86,10 @@ var deleteQuestion = (req, res) => {
         .catch(err => {
             res.send(err)
         })
+      }
     })
     .catch(err => {
-        res.send(err)
+      res.send(err)
     })
 }
 
