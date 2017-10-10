@@ -53,6 +53,9 @@ var updateQuestion = (req, res) => {
         })
       }
     })
+    .catch(err => {
+      res.send(err)
+    })
 }
 
 var deleteQuestion = (req, res) => {
