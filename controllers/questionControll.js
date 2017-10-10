@@ -32,20 +32,26 @@ var allQuestions = (req, res) => {
 }
 
 var updateQuestion = (req, res) => {
-    // models.findById({
-    //     _id: req.params.id
-    // })
-    models.update({
+    models.findById({
         _id: req.params.id
-    }, {
-        title: req.body.title,
-        content: req.body.content
     })
     .then(result => {
-        res.send(result)
-    })
-    .catch(err => {
-        res.send(err)
+      if (req.headers.auth._id != result.userId) {
+        res.send('tidak bisa diupdate olehmu')
+      } else {
+        models.update({
+            _id: req.params.id
+        }, {
+            title: req.body.title,
+            content: req.body.content
+        })
+        .then(result => {
+            res.send(result)
+        })
+        .catch(err => {
+            res.send(err)
+        })
+      }
     })
 }
 
