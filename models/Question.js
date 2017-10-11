@@ -12,10 +12,7 @@ var questionSchema = new Schema({
         type: String,
         required: true
     },
-    content: {
-        type: String,
-        required: true
-    },
+    content: String,
     answer: [{
         type: ObjectId,
         ref: 'Answer'

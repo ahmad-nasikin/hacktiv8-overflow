@@ -8,7 +8,7 @@ var replay = (req, res) => {
         content: req.body.content,
         voteUp: [],
         voteDown: [],
-        author: req.headers.auth._id
+        userId: req.headers.auth._id
 
     })
     .then(result => {
@@ -20,7 +20,7 @@ var replay = (req, res) => {
         }})
         .then(resultAnswer => {
             console.log('resultAnswer', resultAnswer)
-            res.send('Replay Question Success')
+            res.send(resultAnswer)
         })
         .catch(err => {
             res.send(err)

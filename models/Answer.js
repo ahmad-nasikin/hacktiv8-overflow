@@ -19,7 +19,7 @@ var answerSchema = new Schema({
         type: ObjectId,
         ref: 'User'
     }],
-    author: {
+    userId: {
         type: ObjectId,
         ref: 'User'
     }

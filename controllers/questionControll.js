@@ -21,8 +21,15 @@ var create = (req, res) => {
 
 var allQuestions = (req, res) => {
     models.find({})
-    .populate('answer')
     .populate('userId', 'username')
+    // .populate('answer')
+    .populate({
+      path: 'answer',
+      populate: {
+        path: 'userId',
+        select: 'username'
+      }
+    })
     .then(result => {
         res.send(result)
     })
@@ -31,13 +38,31 @@ var allQuestions = (req, res) => {
     })
 }
 
+var getOneQuestion = (req, res) => {
+  models.findOne({_id: req.params.id})
+  .populate('userId', 'username')
+  .populate({
+    path: 'answer',
+    populate: {
+      path: 'userId',
+      select: 'username'
+    }
+  })
+  .then(result => {
+      res.send(result)
+  })
+  .catch(err => {
+      res.send(err)
+  })
+}
+
 var updateQuestion = (req, res) => {
     models.findById({
         _id: req.params.id
     })
     .then(result => {
       if (req.headers.auth._id != result.userId) {
-        res.send('tidak bisa diupdate olehmu')
+        res.status(401).send('tidak bisa diupdate olehmu')
       } else {
         models.update({
             _id: req.params.id
@@ -66,7 +91,7 @@ var deleteQuestion = (req, res) => {
       console.log('headers token', req.headers.auth._id)
       console.log('result id', result.userId)
       if (req.headers.auth._id != result.userId) {
-        res.send('tidak bisa delete')
+        res.status(401).send('tidak bisa delete')
       } else {
         models.remove({
             _id: req.params.id
@@ -122,4 +147,4 @@ deleteAnswer = (req, res) => {
     })
 }
 
-module.exports = {create, allQuestions, updateQuestion, deleteQuestion, deleteAnswer}
+module.exports = {create, allQuestions, updateQuestion, deleteQuestion, deleteAnswer, getOneQuestion}
