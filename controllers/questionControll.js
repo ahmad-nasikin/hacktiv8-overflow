@@ -39,7 +39,7 @@ var allQuestions = (req, res) => {
 }
 
 var getOneQuestion = (req, res) => {
-  models.findOne({_id: req.params.id})
+  models.findById({_id: req.params.id})
   .populate('userId', 'username')
   .populate({
     path: 'answer',
